@@ -1,0 +1,13 @@
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+$red-background: 9D2E2C;
+$pale-yellow: F9EA99;
+$pale-blue: 7DB6D5;
+$pale-orange: E7A555;
+$charcoal: 4A4747;
+
+body {
+  background-color: $red-background;
+  font-family: Arial, Helvetica, sans-serif;
+}
