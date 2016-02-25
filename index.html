@@ -1,28 +1,47 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <link rel="stylesheet" href="assets/styles/index.scss">
       <title>Example</title>
 
       <script src="vendor.bundle.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="bundle.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body class="container-fluid">
-      <div>NavBar - Admin Login, Admin Console, About</div>
-      <h1>Plot Point O</h1>
-      <h3>Your source for reviews of plot-driven video games, both before AND after you've played.</h3>
+      <div class="title-bar"><h1>Plot.O</h1>Your source for reviews of plot-driven video games, both before AND after you've played.</div>
 
-      <div>Div for New Player Content
-        <div>Featured Post</div>
-        <div>Links to Recent posts</div>
-        <div>Links to More</div>
+
+      <!--Bootstrap nav tabs -->
+      <div class="bootstrap-tab-container">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+          <li role="presentation"><a href="#spoiler-free" aria-controls="spoiler-free" role="tab" data-toggle="tab">Spoiler-Free Zone</a></li>
+          <li role="presentation"><a href="#plot-analysis" aria-controls="plot-analysis" role="tab" data-toggle="tab">Plot Analysis (Spoilers!)</a></li>
+          <li role="presentation"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">...</div>
+          <div role="tabpanel" class="tab-pane" id="spoiler-free">
+                    <div>Spoiler free posts
+                      <div>Featured Post</div>
+                      <div>Links to Recent posts</div>
+                      <div>Links to More</div>
+                    </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="plot-analysis">
+                    <div>All those spoilerzzzz
+                      <div>Featured Post</div>
+                      <div>Links to Recent posts</div>
+                      <div>Links to More</div>
+                    </div>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="login">Login options</div>
+        </div>
       </div>
 
-      <div>Div for After the Game
-        <div>Featured Post</div>
-        <div>Links to Recent posts</div>
-        <div>Links to More</div>
-      </div>
-
-      {{!-- <script src="http://localhost:8080/webpack-dev-server.js"></script> --}}
+      <script src="http://localhost:8080/webpack-dev-server.js"></script>
     </body>
 </html>
