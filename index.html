@@ -72,40 +72,34 @@
                     </label>
                     <input type="submit" name="submit" value="Submit">
                   </form>
+                  <form id="new-game">
+                    <p><h3>New Game:</h3></p>
+                    <label>Name
+                      <input type="text" name="game[name]" value="">
+                    </label></br>
+                    <label>Developer:
+                      <input type="text" name="game[developer]" value="">
+                    </label></br>
+                    <label>Platforms:
+                      <input type="text" name="game[platforms]" value="">
+                    </label></br>
+                    <label>Rating:
+                      <input type="text" name="game[rating]" value="">
+                    </label></br>
+                    <input type="submit" name="submit" value="Submit">
+                  </form>
           </div>
           <div role="tabpanel" class="tab-pane" id="no-spoilers-posts">
           </div>
           <div role="tabpanel" class="tab-pane" id="spoilery-posts">
           </div>
           <div role="tabpanel" class="tab-pane" id="login">
-
-            <!-- <form id="sign-in">
-              <p><h3>Sign in:</h3></p>
-              <label>E-mail
-                <input type="text" name="credentials[email]" value="">
-              </label>
-              <label>Password
-                <input type="password" name="credentials[password]" value="">
-              </label>
-              <input type="submit" name="submit" value="Submit">
-            </form>
-            <form id="sign-out">
-              <p><h3>Sign out:</h3></p>
-              <input type="submit" name="submit" value="Submit">
-            </form>
-            <form id="change-password">
-              <p><h3>Change password:</h3></p>
-              <label>Old Password
-                <input type="password" name="passwords[old]" value="">
-              </label>
-              <label>New Password
-                <input type="password" name="passwords[new]" value="">
-              </label>
-              <input type="submit" name="submit" value="Submit">
-            </form>  -->
           </div>
         </div>
       </div>
+      <!--<label>Paragraph text</br>
+        <textarea name="regular" class="paragraph-input"><p>I'm a paragraph</p></textarea>
+      </label> -->
 
       <script src="http://localhost:8080/webpack-dev-server.js"></script>
     </body>

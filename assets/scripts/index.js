@@ -100,6 +100,8 @@ $(document).ready(function(){
   getNoSpoilersPosts();
 });
 
+// ajax
+
 const myApp = {
   baseUrl: 'http://localhost:3000',
 };
@@ -107,7 +109,7 @@ const myApp = {
 let adminStatus = false;
 
 $(document).ready(() => {
-console.log("sign in forms are active");
+console.log("forms are active");
 // sign in
   $('#sign-in').on('submit', function(e) {
     console.log("clicked");
@@ -126,7 +128,6 @@ console.log("sign in forms are active");
       console.error(jqxhr);
       alert('Invalid email and password combination');
     });
-
   });
 //change pw
   $('#change-password').on('submit', function(e) {
@@ -176,6 +177,28 @@ console.log("sign in forms are active");
       alert('You are now logged out.');
     }).fail(function(jqxhr) {
       console.error(jqxhr);
+    });
+  });
+
+  $('#new-game').on('submit', function(e) {
+    console.log("new game submit clicked");
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    $.ajax({
+      url: myApp.baseUrl + '/games/',
+      method: 'POST',
+      headers: {
+        Authorization: 'Token token=' + myApp.user.token,
+      },
+      contentType: false,
+      processData: false,
+      data: formData,
+    }).done(function(data) {
+      myApp.user = data.user;
+      console.log(data);
+    }).fail(function(jqxhr) {
+      console.error(jqxhr);
+      alert('something broke');
     });
   });
 
