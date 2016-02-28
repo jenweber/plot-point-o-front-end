@@ -41,7 +41,6 @@ $(document).ready(() => {
       data: formData,
     }).done(function(data) {
       myApp.user = data.user;
-      console.log(data);
       console.log("user is signed in");
       $('#options').modal('toggle');
     }).fail(function(jqxhr) {

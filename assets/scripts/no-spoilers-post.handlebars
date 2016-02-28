@@ -1,6 +1,8 @@
 {{#each posts}}
-  <h3>{{title}}</h3>
-  {{content}}
-  {{id}}
-  <br>
+<a name="{{game.id}}"><h3>{{title}}</h3></a>
+<b><big>{{game.name}}</big></b></br>
+Developed by: {{game.developer}}</br>
+Platforms: {{game.platforms}}</br>
+{{content}}</br>
+<br>
 {{/each}}

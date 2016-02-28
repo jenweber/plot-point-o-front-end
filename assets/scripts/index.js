@@ -34,6 +34,23 @@ $('#login').click(function (e) {
 });
 
 // handlebars
+
+let displaySpoileryAnchors = function(response){
+  let posts = response.spoilery_posts;
+  let anchorTemplate = require('./anchor.handlebars');
+  $('#spoilery-posts').append(anchorTemplate({
+    posts
+  }));
+};
+
+let displayNoSpoilerAnchors = function(response){
+  let posts = response.no_spoilers_posts;
+  let anchorTemplate = require('./anchor.handlebars');
+  $('#no-spoilers-posts').append(anchorTemplate({
+    posts
+  }));
+};
+
 let displaySpoileryPosts = function(response){
   let posts = response.spoilery_posts;
   let spoileryPostTemplate = require('./spoilery-post.handlebars');
@@ -58,6 +75,7 @@ let getSpoileryPosts = function(){
     method: 'GET',
     dataType: 'json'
   }).done(function(posts){
+    displaySpoileryAnchors(posts);
     displaySpoileryPosts(posts);
     console.log(posts);
   });
@@ -69,6 +87,7 @@ let getNoSpoilersPosts = function(){
     method: 'GET',
     dataType: 'json'
   }).done(function(posts){
+    displayNoSpoilerAnchors(posts);
     displayNoSpoilersPosts(posts);
     console.log(posts);
   });
