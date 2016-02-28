@@ -1,8 +1,8 @@
 {{#each posts}}
-<a name="{{game.id}}"><h3>{{title}}</h3></a>
-<b><big>{{game.name}}</big></b></br>
-Developed by: {{game.developer}}</br>
-Platforms: {{game.platforms}}</br>
-{{content}}</br>
+<div class="post-title"><a name="{{game.id}}"><h3>{{title}}</h3></a></div>
+<div class="game-name"><b><big>{{game.name}}</big></b><div>
+<div class="developed-by">Developed by: {{game.developer}}</div>
+<div class="platforms">Platforms: {{game.platforms}}</div>
+<div class="post-content">{{content}}</div>
 <br>
 {{/each}}
