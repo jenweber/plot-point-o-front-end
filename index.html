@@ -9,8 +9,31 @@
     </head>
     <body class="container-fluid">
       <div class="title-bar"><h3>Plot.O</h3>Your source for reviews of plot-driven video games, both before AND after you've played.</div>
-
-
+<!--
+      <form id="sign-in">
+        <p><h3>Sign in:</h3></p>
+        <label>E-mail
+          <input type="text" name="credentials[email]" value="">
+        </label>
+        <label>Password
+          <input type="password" name="credentials[password]" value="">
+        </label>
+        <input type="submit" name="submit" value="Submit">
+      </form>
+      <form id="sign-out">
+        <p><h3>Sign out:</h3></p>
+        <input type="submit" name="submit" value="Submit">
+      </form>
+      <form id="change-password">
+        <p><h3>Change password:</h3></p>
+        <label>Old Password
+          <input type="password" name="passwords[old]" value="">
+        </label>
+        <label>New Password
+          <input type="password" name="passwords[new]" value="">
+        </label>
+        <input type="submit" name="submit" value="Submit">
+      </form> -->
       <!--Bootstrap nav tabs -->
       <div class="bootstrap-tab-container">
         <!-- Nav tabs -->
@@ -23,27 +46,40 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="home">...</div>
+          <div role="tabpanel" class="tab-pane active" id="home">
+
+                  <form id="sign-in">
+                    <p><h3>Sign in:</h3></p>
+                    <label>E-mail
+                      <input type="text" name="credentials[email]" value="">
+                    </label>
+                    <label>Password
+                      <input type="password" name="credentials[password]" value="">
+                    </label>
+                    <input type="submit" name="submit" value="Submit">
+                  </form>
+                  <form id="sign-out">
+                    <p><h3>Sign out:</h3></p>
+                    <input type="submit" name="submit" value="Submit">
+                  </form>
+                  <form id="change-password">
+                    <p><h3>Change password:</h3></p>
+                    <label>Old Password
+                      <input type="password" name="passwords[old]" value="">
+                    </label>
+                    <label>New Password
+                      <input type="password" name="passwords[new]" value="">
+                    </label>
+                    <input type="submit" name="submit" value="Submit">
+                  </form>
+          </div>
           <div role="tabpanel" class="tab-pane" id="no-spoilers-posts">
           </div>
           <div role="tabpanel" class="tab-pane" id="spoilery-posts">
           </div>
           <div role="tabpanel" class="tab-pane" id="login">
-            <!-- <form id="sign-up">
-              <p><h3>Sign up:</h3></p>
-              <label>E-mail
-                <input type="text" name="credentials[email]" value="">
-              </label>
-              <label>Password
-                <input type="password" name="credentials[password]" value="">
-              </label>
-              <label>Confirm Password
-                <input type="password" name="credentials[password_confirmation]" value="">
-              </label>
-              <input type="submit" name="submit" value="Submit"><br>
-              *Connection is unsecured. Don't use a real password!
-            </form> -->
-            <form id="sign-in">
+
+            <!-- <form id="sign-in">
               <p><h3>Sign in:</h3></p>
               <label>E-mail
                 <input type="text" name="credentials[email]" value="">
@@ -66,7 +102,7 @@
                 <input type="password" name="passwords[new]" value="">
               </label>
               <input type="submit" name="submit" value="Submit">
-            </form>
+            </form>  -->
           </div>
         </div>
       </div>
