@@ -9,31 +9,7 @@
     </head>
     <body class="container-fluid">
       <div class="title-bar"><h3>Plot.O</h3>Your source for reviews of plot-driven video games, both before AND after you've played.</div>
-<!--
-      <form id="sign-in">
-        <p><h3>Sign in:</h3></p>
-        <label>E-mail
-          <input type="text" name="credentials[email]" value="">
-        </label>
-        <label>Password
-          <input type="password" name="credentials[password]" value="">
-        </label>
-        <input type="submit" name="submit" value="Submit">
-      </form>
-      <form id="sign-out">
-        <p><h3>Sign out:</h3></p>
-        <input type="submit" name="submit" value="Submit">
-      </form>
-      <form id="change-password">
-        <p><h3>Change password:</h3></p>
-        <label>Old Password
-          <input type="password" name="passwords[old]" value="">
-        </label>
-        <label>New Password
-          <input type="password" name="passwords[new]" value="">
-        </label>
-        <input type="submit" name="submit" value="Submit">
-      </form> -->
+
       <!--Bootstrap nav tabs -->
       <div class="bootstrap-tab-container">
         <!-- Nav tabs -->
@@ -48,52 +24,87 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
 
-                  <form id="sign-in">
-                    <p><h3>Sign in:</h3></p>
-                    <label>E-mail
-                      <input type="text" name="credentials[email]" value="">
-                    </label>
-                    <label>Password
-                      <input type="password" name="credentials[password]" value="">
-                    </label>
-                    <input type="submit" name="submit" value="Submit">
-                  </form>
-                  <form id="sign-out">
-                    <p><h3>Sign out:</h3></p>
-                    <input type="submit" name="submit" value="Submit">
-                  </form>
-                  <form id="change-password">
-                    <p><h3>Change password:</h3></p>
-                    <label>Old Password
-                      <input type="password" name="passwords[old]" value="">
-                    </label>
-                    <label>New Password
-                      <input type="password" name="passwords[new]" value="">
-                    </label>
-                    <input type="submit" name="submit" value="Submit">
-                  </form>
-                  <form id="new-game">
-                    <p><h3>New Game:</h3></p>
-                    <label>Name
-                      <input type="text" name="game[name]" value="">
-                    </label></br>
-                    <label>Developer:
-                      <input type="text" name="game[developer]" value="">
-                    </label></br>
-                    <label>Platforms:
-                      <input type="text" name="game[platforms]" value="">
-                    </label></br>
-                    <label>Rating:
-                      <input type="text" name="game[rating]" value="">
-                    </label></br>
-                    <input type="submit" name="submit" value="Submit">
-                  </form>
+            <form id="sign-in">
+              <p><h3>Sign in:</h3></p>
+              <label>E-mail
+                <input type="text" name="credentials[email]" value="">
+              </label>
+              <label>Password
+                <input type="password" name="credentials[password]" value="">
+              </label>
+              <input type="submit" name="submit" value="Submit">
+            </form>
+            <form id="sign-out">
+              <p><h3>Sign out:</h3></p>
+              <input type="submit" name="submit" value="Submit">
+            </form>
+            <form id="change-password">
+              <p><h3>Change password:</h3></p>
+              <label>Old Password
+                <input type="password" name="passwords[old]" value="">
+              </label>
+              <label>New Password
+                <input type="password" name="passwords[new]" value="">
+              </label>
+              <input type="submit" name="submit" value="Submit">
+            </form>
+            <form id="new-game">
+              <p><h3>New Game:</h3></p>
+              <label>Name
+                <input type="text" name="game[name]" value="">
+              </label></br>
+              <label>Developer:
+                <input type="text" name="game[developer]" value="">
+              </label></br>
+              <label>Platforms:
+                <input type="text" name="game[platforms]" value="">
+              </label></br>
+              <label>Rating:
+                <input type="text" name="game[rating]" value="">
+              </label></br>
+              <input type="submit" name="submit" value="Submit">
+            </form>
+
+            <form id="new-spoilery-post">
+              <p><h3>Create New Spoilery Post:</h3></p>
+              <label>Title
+                <input type="text" id="title" name="spoilery_post[title]" value="">
+              </label></br>
+              <label>Content:</br>
+                <textarea id="post-content" name="spoilery_post[content]" class="paragraph-input"><p>I'm a paragraph</p></textarea>
+              </label></br>
+              <label>Game:
+                <select class="list-of-games" name="spoilery_post[game_id]">
+                </select>
+                <!--<input type="number" id="game-id" name="spoilery_post[game_id]" value=""> -->
+              </label></br></br>
+              <input type="submit" name="submit" value="Submit">
+            </form>
+
+            <form id="new-no-spoilers-post">
+              <p><h3>Create New No Spoilers Post:</h3></p>
+              <label>Title
+                <input type="text" id="title" name="no_spoilers_post[title]" value="">
+              </label></br>
+              <label>Content:</br>
+                <textarea id="post-content" name="no_spoilers_post[content]" class="paragraph-input"><p>I'm a paragraph</p></textarea>
+              </label></br>
+              <label>Game:
+                <select class="list-of-games" name="no_spoilers_post[game_id]">
+                </select>
+                <!--<input type="number" id="game-id" name="spoilery_post[game_id]" value=""> -->
+              </label></br></br>
+              <input type="submit" name="submit" value="Submit">
+            </form>
+
           </div>
           <div role="tabpanel" class="tab-pane" id="no-spoilers-posts">
           </div>
           <div role="tabpanel" class="tab-pane" id="spoilery-posts">
           </div>
           <div role="tabpanel" class="tab-pane" id="login">
+
+
           </div>
         </div>
       </div>

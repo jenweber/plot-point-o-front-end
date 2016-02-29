@@ -66,7 +66,14 @@ let displayNoSpoilersPosts = function(response){
   $('#no-spoilers-posts').append(noSpoilersPostTemplate({
     posts
   }));
+};
 
+let displayGameList = function(response){
+  let games = response.games;
+  let gameListTemplate = require('./radio-button-games.handlebars');
+  $('.list-of-games').append(gameListTemplate({
+    games
+  }));
 };
 
 let getSpoileryPosts = function(){
@@ -93,11 +100,21 @@ let getNoSpoilersPosts = function(){
   });
 };
 
-
+let getGames = function(){
+  $.ajax({
+    url: "http://localhost:3000/games",
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(posts){
+    displayGameList(posts);
+    console.log(posts);
+  });
+};
 
 $(document).ready(function(){
   getSpoileryPosts();
   getNoSpoilersPosts();
+  getGames();
 });
 
 // ajax
@@ -173,7 +190,6 @@ console.log("forms are active");
     }).done(function(data) {
       console.log(data);
       console.log('signed out');
-      $('#options').modal('toggle');
       alert('You are now logged out.');
     }).fail(function(jqxhr) {
       console.error(jqxhr);
@@ -195,6 +211,49 @@ console.log("forms are active");
       data: formData,
     }).done(function(data) {
       myApp.user = data.user;
+      console.log(data);
+    }).fail(function(jqxhr) {
+      console.error(jqxhr);
+      alert('something broke');
+    });
+  });
+
+  $('#new-spoilery-post').on('submit', function(e) {
+    console.log("new spoilery post submit clicked");
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    $.ajax({
+      url: myApp.baseUrl + '/spoilery_posts/',
+      method: 'POST',
+      headers: {
+        Authorization: 'Token token=' + myApp.user.token,
+      },
+      contentType: false,
+      processData: false,
+      data: formData,
+    }).done(function(data) {
+      console.log(data);
+      console.log(data.spoilery_post.id);
+    }).fail(function(jqxhr) {
+      console.error(jqxhr);
+      alert('something broke');
+    });
+  });
+
+  $('#new-no-spoilers-post').on('submit', function(e) {
+    console.log("new no spoilers post submit clicked");
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    $.ajax({
+      url: myApp.baseUrl + '/no_spoilers_posts/',
+      method: 'POST',
+      headers: {
+        Authorization: 'Token token=' + myApp.user.token,
+      },
+      contentType: false,
+      processData: false,
+      data: formData,
+    }).done(function(data) {
       console.log(data);
     }).fail(function(jqxhr) {
       console.error(jqxhr);
