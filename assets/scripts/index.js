@@ -166,7 +166,7 @@ $(document).on('click','.save-ns-changes',function(e){
     data: {
       no_spoilers_post: {
         title: $('#edit-ns-post-title').val(),
-        content: $('#edit-ns-post-content').text(),
+        content: $('#edit-ns-post-content').val(),
         game_id: $('#edit-ns-post-game').val(),
       }
     },
