@@ -4,8 +4,8 @@
 <div class="developed-by">Developed by: {{game.developer}}</div>
 <div class="platforms">Platforms: {{game.platforms}}</div>
 <div class="spoiler-warning">WARNING: You are in the plot analysis zone, meaning that anything worth spoiling CAN and WILL BE spoiled. Check out the "Spoiler Free Zone" for posts written for new players.</div>
-<div class="post-content">{{content}}</div>
-<button name="edit-sp{{id}}-g{{game.id}}">Edit</button>
-<button class="sp-delete-buttons" id="del-sp{{id}}-g{{game.id}}" value="{{id}}">Delete</button>
+<div class="post-content">{{{content}}}</div>
+<button class="sp-edit-buttons admin-console" id="edit-sp{{id}}-g{{game.id}}" value="{{id}}">Edit</button>
+<button class="sp-delete-buttons admin-console" id="del-sp{{id}}-g{{game.id}}" value="{{id}}">Delete</button>
 <br>
 {{/each}}

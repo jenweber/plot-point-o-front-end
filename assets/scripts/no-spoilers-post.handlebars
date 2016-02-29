@@ -3,8 +3,8 @@
 <div class="game-name"><b><big>{{game.name}}</big></b><div>
 <div class="developed-by">Developed by: {{game.developer}}</div>
 <div class="platforms">Platforms: {{game.platforms}}</div>
-<div class="post-content">{{content}}</div>
-<button name="edit-np{{id}}-g{{game.id}}">Edit</button>
-<button class="ns-delete-buttons" id="del-np{{id}}-g{{game.id}}" value="{{id}}">Delete</button>
+<div class="post-content">{{{content}}}</div>
+<button class="ns-edit-buttons admin-console" id="edit-np{{id}}-g{{game.id}}" value="{{id}}">Edit</button>
+<button class="ns-delete-buttons admin-console" id="del-np{{id}}-g{{game.id}}" value="{{id}}">Delete</button>
 <br>
 {{/each}}
