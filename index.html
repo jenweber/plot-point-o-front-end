@@ -98,6 +98,7 @@
             </form>
 
           </div>
+          <!-- No Spoilers Tab begins here -->
           <div role="tabpanel" class="tab-pane" id="no-spoilers-posts">
             <!-- No Spoilers Modal -->
             <div class="modal fade" id="noSpoilersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -131,17 +132,47 @@
                 </div>
               </div>
             </div>
-          <!-- END modal -->
+            <!-- END modal -->
           </div>
+          <!-- END no spoilers tab -->
+          <!-- spoilery tab begins here -->
           <div role="tabpanel" class="tab-pane" id="spoilery-posts">
+            <!-- Spoilery Modal -->
+            <div class="modal fade" id="SpoileryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit Post</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form id="edit-sp-post-form">
+                      <label>Title:</br>
+                        <input type="text" name="spoilery_post[title]" id="edit-sp-post-title" value="">
+                      </label></br>
+                      <label>Content:</br>
+                        <textarea name="spoilery_post[content]" class="paragraph-input" id="edit-sp-post-content"></textarea>
+                      </label></br>
+                      <label>Game:
+                        <select class="list-of-games" name="spoilery_post[game_id]" id="edit-sp-post-game">
+                        </select>
+                      </label></br>
+                      <!-- <label>Post ID (Read Only):
+                        <input type="number" id="edit-ns-post-id" name="no_spoilers_post[id]" value="5" readonly><br>
+                      </label></br> -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary save-sp-changes">Save changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <!-- END spoilery tab -->
           <div role="tabpanel" class="tab-pane" id="login">
-            <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary btn-sm modal-trigger admin-console" data-toggle="modal" data-target="#noSpoilersModal">
-                Edit Post
-              </button>
-
-
+              ...
           </div>
         </div>
       </div>

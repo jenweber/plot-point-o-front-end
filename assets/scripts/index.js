@@ -125,6 +125,7 @@ $(document).ready(function(){
 
 let editid = 0;
 
+// Ajax to get no spoilers post SINGULAR
 $(document).on('click','.ns-modal-trigger',function(){
   editid = $(this).val();
   console.log(editid);
@@ -138,13 +139,7 @@ $(document).on('click','.ns-modal-trigger',function(){
   });
 });
 
-// to use later
-// $(document).on('click','.sp-modal-trigger',function(){
-//   editid = $(this).val();
-//   console.log(editid);
-// });
-
-// JQuery to populate modal
+// JQuery to populate no spoilers modal
 const fillNsEditForm = function(response) {
   let post = response.no_spoilers_post;
   console.log(post);
@@ -153,6 +148,7 @@ const fillNsEditForm = function(response) {
   $('#edit-ns-post-game').val(post.game_id);
 };
 
+// ajax to send PATCH for no spoilers
 $(document).on('click','.save-ns-changes',function(e){
   console.log("edit no spoilers post submit clicked");
   console.log($('#edit-ns-post-content').text());
@@ -177,30 +173,54 @@ $(document).on('click','.save-ns-changes',function(e){
   });
 });
 
-// basic ajax
+// Ajax to get spoilery post SINGULAR
+$(document).on('click','.sp-modal-trigger',function(){
+  editid = $(this).val();
+  $.ajax({
+    url: myApp.baseUrl + '/spoilery_posts/' + editid,
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(post){
+    console.log(post);
+    fillSpEditForm(post)
+  });
+});
 
-// $.ajax({
-//   url: myApp.baseUrl + '/no_spoilers_posts/' + editid,
-//   method: 'PATCH',
-//   headers: {
-//     Authorization: 'Token token=' + myApp.user.token,
-//   },
-  // data: {
-  //   no_spoilers_post: {
-  //     title: 'maybe it will work this time',
-  //     content: 'at last, thank god',
-  //     game_id: 4,
-  //   }
-  // },
-// }).done(function(data) {
-//   console.log(data);
-// }).fail(function(jqxhr) {
-//   console.error(jqxhr);
-//   console.log('something broke');
-// });
-// });
+// JQuery to populate spoilery post modal
+const fillSpEditForm = function(response) {
+  let post = response.spoilery_post;
+  $('#edit-sp-post-title').val(post.title);
+  $('#edit-sp-post-content').text(post.content);
+  $('#edit-sp-post-game').val(post.game_id);
+};
 
-let adminStatus = false;
+// ajax to send PATCH for spoilery posts
+$(document).on('click','.save-sp-changes',function(e){
+  console.log("edit spoilery post submit clicked");
+  console.log($('#edit-sp-post-title').val());
+  console.log($('#edit-sp-post-content').val());
+  console.log($('#edit-sp-post-game').val());
+  console.log(editid);
+  e.preventDefault();
+  $.ajax({
+    url: myApp.baseUrl + '/spoilery_posts/' + editid,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + myApp.user.token,
+    },
+    data: {
+      spoilery_post: {
+        title: $('#edit-sp-post-title').val(),
+        content: $('#edit-sp-post-content').val(),
+        game_id: $('#edit-sp-post-game').val(),
+      }
+    },
+  }).done(function(data) {
+    console.log(data);
+  }).fail(function(jqxhr) {
+    console.error(jqxhr);
+  });
+});
 
 $(document).ready(() => {
 console.log("forms are active");
