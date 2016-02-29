@@ -12,6 +12,9 @@ require('../styles/index.scss');
 //   console.log('JavaScript is running');
 // });
 
+
+
+
 // Enable bootstrap tabs
 $('#home a').click(function (e) {
   e.preventDefault();
@@ -195,7 +198,7 @@ console.log("forms are active");
       console.error(jqxhr);
     });
   });
-
+//create resources
   $('#new-game').on('submit', function(e) {
     console.log("new game submit clicked");
     e.preventDefault();
@@ -260,7 +263,42 @@ console.log("forms are active");
       alert('something broke');
     });
   });
+//delete resources
+
+
 
 });
+
+$('.test-buttons').on('click', function(){console.log("you clicked test button")})
+
+$('#form-test').on('submit', function(e) {
+  console.log("new no spoilers post submit clicked");
+});
+
+$(document).on('click','.delete-buttons',function(){
+  console.log("you clicked a delete button");
+  // e.preventDefault();
+  // let formData = new FormData(e.target);
+  // $.ajax({
+  //   url: myApp.baseUrl + '/no_spoilers_posts/',
+  //   method: 'POST',
+  //   headers: {
+  //     Authorization: 'Token token=' + myApp.user.token,
+  //   },
+  //   contentType: false,
+  //   processData: false,
+  //   data: formData,
+  // }).done(function(data) {
+  //   console.log(data);
+  // }).fail(function(jqxhr) {
+  //   console.error(jqxhr);
+  //   alert('something broke');
+  // });
+});
+
+// template for handlebars button click handler
+// $(document).on('click','.test-buttons',function(){
+//
+// });
 
 // module.exports = indexJS;
