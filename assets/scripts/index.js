@@ -118,7 +118,9 @@ $(document).ready(function(){
   getSpoileryPosts();
   getNoSpoilersPosts();
   getGames();
+
 });
+$('.test-buttons').on('click', '.test-buttons', function(){console.log(value)})
 
 // ajax
 
@@ -269,31 +271,50 @@ console.log("forms are active");
 
 });
 
-$('.test-buttons').on('click', function(){console.log("you clicked test button")})
+$('.test-buttons').on('click', function(){console.log($(this).val())})
 
 $('#form-test').on('submit', function(e) {
   console.log("new no spoilers post submit clicked");
 });
 
-$(document).on('click','.delete-buttons',function(){
-  console.log("you clicked a delete button");
-  // e.preventDefault();
-  // let formData = new FormData(e.target);
-  // $.ajax({
-  //   url: myApp.baseUrl + '/no_spoilers_posts/',
-  //   method: 'POST',
-  //   headers: {
-  //     Authorization: 'Token token=' + myApp.user.token,
-  //   },
-  //   contentType: false,
-  //   processData: false,
-  //   data: formData,
-  // }).done(function(data) {
-  //   console.log(data);
-  // }).fail(function(jqxhr) {
-  //   console.error(jqxhr);
-  //   alert('something broke');
-  // });
+$(document).on('click','.sp-delete-buttons',function(){
+  console.log($(this).val());
+  let deleteid = $(this).val();
+  $.ajax({
+    url: myApp.baseUrl + '/spoilery_posts/' + deleteid,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + myApp.user.token,
+    },
+    contentType: false,
+    processData: false,
+    data: {id: deleteid},
+  }).done(function(data) {
+    console.log(data);
+    console.log('you deleted a spoilery post');
+  }).fail(function(jqxhr) {
+    console.error(jqxhr);
+  });
+});
+
+$(document).on('click','.ns-delete-buttons',function(){
+  console.log($(this).val());
+  let deleteid = $(this).val();
+  $.ajax({
+    url: myApp.baseUrl + '/no_spoilers_posts/' + deleteid,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + myApp.user.token,
+    },
+    contentType: false,
+    processData: false,
+    data: {id: deleteid},
+  }).done(function(data) {
+    console.log(data);
+    console.log('you deleted a no spoilers post');
+  }).fail(function(jqxhr) {
+    console.error(jqxhr);
+  });
 });
 
 // template for handlebars button click handler
