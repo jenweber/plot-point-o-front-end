@@ -12,7 +12,9 @@ require('../styles/index.scss');
 //   console.log('JavaScript is running');
 // });
 
-
+const myApp = {
+  baseUrl: 'http://localhost:3000',
+};
 
 
 // Enable bootstrap tabs
@@ -120,13 +122,83 @@ $(document).ready(function(){
   getGames();
 
 });
-$('.test-buttons').on('click', '.test-buttons', function(){console.log(value)})
 
-// ajax
+let editid = 0;
 
-const myApp = {
-  baseUrl: 'http://localhost:3000',
+$(document).on('click','.ns-modal-trigger',function(){
+  editid = $(this).val();
+  console.log(editid);
+  $.ajax({
+    url: myApp.baseUrl + '/no_spoilers_posts/' + editid,
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(post){
+    console.log(post);
+    fillNsEditForm(post)
+  });
+});
+
+// to use later
+// $(document).on('click','.sp-modal-trigger',function(){
+//   editid = $(this).val();
+//   console.log(editid);
+// });
+
+// JQuery to populate modal
+const fillNsEditForm = function(response) {
+  let post = response.no_spoilers_post;
+  console.log(post);
+  $('#edit-ns-post-title').val(post.title);
+  $('#edit-ns-post-content').text(post.content);
+  $('#edit-ns-post-game').val(post.game_id);
 };
+
+$(document).on('click','.save-ns-changes',function(e){
+  console.log("edit no spoilers post submit clicked");
+  console.log($('#edit-ns-post-content').text());
+  e.preventDefault();
+  $.ajax({
+    url: myApp.baseUrl + '/no_spoilers_posts/' + editid,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + myApp.user.token,
+    },
+    data: {
+      no_spoilers_post: {
+        title: $('#edit-ns-post-title').val(),
+        content: $('#edit-ns-post-content').text(),
+        game_id: $('#edit-ns-post-game').val(),
+      }
+    },
+  }).done(function(data) {
+    console.log(data);
+  }).fail(function(jqxhr) {
+    console.error(jqxhr);
+  });
+});
+
+// basic ajax
+
+// $.ajax({
+//   url: myApp.baseUrl + '/no_spoilers_posts/' + editid,
+//   method: 'PATCH',
+//   headers: {
+//     Authorization: 'Token token=' + myApp.user.token,
+//   },
+  // data: {
+  //   no_spoilers_post: {
+  //     title: 'maybe it will work this time',
+  //     content: 'at last, thank god',
+  //     game_id: 4,
+  //   }
+  // },
+// }).done(function(data) {
+//   console.log(data);
+// }).fail(function(jqxhr) {
+//   console.error(jqxhr);
+//   console.log('something broke');
+// });
+// });
 
 let adminStatus = false;
 
@@ -269,12 +341,6 @@ console.log("forms are active");
 
 
 
-});
-
-$('.test-buttons').on('click', function(){console.log($(this).val())})
-
-$('#form-test').on('submit', function(e) {
-  console.log("new no spoilers post submit clicked");
 });
 
 $(document).on('click','.sp-delete-buttons',function(){

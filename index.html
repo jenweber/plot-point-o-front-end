@@ -71,7 +71,7 @@
                 <input type="text" id="title" name="spoilery_post[title]" value="">
               </label></br>
               <label>Content:</br>
-                <textarea id="post-content" name="spoilery_post[content]" class="paragraph-input"><p>I'm a paragraph</p></textarea>
+                <textarea id="sp-post-content" name="spoilery_post[content]" class="paragraph-input" placeholder="<i>html markup supported</i>"></textarea>
               </label></br>
               <label>Game:
                 <select class="list-of-games" name="spoilery_post[game_id]">
@@ -87,7 +87,7 @@
                 <input type="text" id="title" name="no_spoilers_post[title]" value="">
               </label></br>
               <label>Content:</br>
-                <textarea id="post-content" name="no_spoilers_post[content]" class="paragraph-input"><p>I'm a paragraph</p></textarea>
+                <textarea id="ns-post-content" name="no_spoilers_post[content]" class="paragraph-input" placeholder="<i>html markup supported</i>"></textarea>
               </label></br>
               <label>Game:
                 <select class="list-of-games" name="no_spoilers_post[game_id]">
@@ -99,22 +99,52 @@
 
           </div>
           <div role="tabpanel" class="tab-pane" id="no-spoilers-posts">
-
+            <!-- No Spoilers Modal -->
+            <div class="modal fade" id="noSpoilersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="edit-post-modal">Edit Post</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form id="edit-ns-post-form">
+                      <label>Title:</br>
+                        <input type="text" name="no_spoilers_post[title]" id="edit-ns-post-title" value="">
+                      </label></br>
+                      <label>Content:</br>
+                        <textarea name="no_spoilers_post[content]" class="paragraph-input" id="edit-ns-post-content"></textarea>
+                      </label></br>
+                      <label>Game:
+                        <select class="list-of-games" name="no_spoilers_post[game_id]" id="edit-ns-post-game">
+                        </select>
+                      </label></br>
+                      <!-- <label>Post ID (Read Only):
+                        <input type="number" id="edit-ns-post-id" name="no_spoilers_post[id]" value="5" readonly><br>
+                      </label></br> -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary save-ns-changes">Save changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- END modal -->
           </div>
           <div role="tabpanel" class="tab-pane" id="spoilery-posts">
           </div>
           <div role="tabpanel" class="tab-pane" id="login">
-            <button class="test-buttons" id="testbutton" value="1">testing</button>
-            <form id="form-test">
-              <p><h3>testing out a form submit</h3></p>
-              <input type="submit" name="submit" value="Submit">
-            </form>
+            <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary btn-sm modal-trigger admin-console" data-toggle="modal" data-target="#noSpoilersModal">
+                Edit Post
+              </button>
+
+
           </div>
         </div>
       </div>
-      <!--<label>Paragraph text</br>
-        <textarea name="regular" class="paragraph-input"><p>I'm a paragraph</p></textarea>
-      </label> -->
 
       <script src="http://localhost:8080/webpack-dev-server.js"></script>
     </body>
