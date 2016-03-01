@@ -18,6 +18,13 @@ const hideAdminConsole = function() {
   } else { $('.admin-console').show(); }
 };
 
+const closeModal = function () {
+  $('#noSpoilersModal').modal('hide');
+  $('#SpoileryModal').modal('hide');
+  $('#adminLoginModal').modal('hide');
+  $('#newContentModal').modal('hide');
+};
+
 $('.bootstrap-tab-container').on('click', function(){
   if (adminLoggedIn === false) {
     $('.admin-console').hide();
@@ -61,7 +68,7 @@ let displayNoSpoilerAnchors = function(response){
 
 //
 let displaySpoileryPosts = function(response){
-  let saveAnchors = $('#spoilery-posts-anchors')
+  let saveAnchors = $('#spoilery-posts-anchors');
   $('#spoilery-posts').text('');
   $('#spoilery-posts').append(saveAnchors);
   let posts = response.spoilery_posts;
@@ -73,7 +80,7 @@ let displaySpoileryPosts = function(response){
 };
 
 let displayNoSpoilersPosts = function(response){
-  let saveAnchors = $('#no-spoilers-posts-anchors')
+  let saveAnchors = $('#no-spoilers-posts-anchors');
   $('#no-spoilers-posts').text('');
   $('#no-spoilers-posts').append(saveAnchors);
   let posts = response.no_spoilers_posts;
@@ -126,18 +133,27 @@ let getGames = function(){
   });
 };
 
-$(document).ready(function(){
+// fires on doc ready, delete, update, create posts
+const refreshHandlebars = function() {
   getSpoileryPosts();
   getNoSpoilersPosts();
   getGames();
+};
+
+// Function to set up handlebars content
+$(document).ready(function(){
+  refreshHandlebars();
 });
+
 
 // declare variable to record the id of the record clicked
 let editid = 0;
 
+
 // Ajax to get no spoilers post SINGULAR
 $(document).on('click','.ns-modal-trigger',function(){
   editid = $(this).val();
+  $('#noSpoilersModal').modal('show');
   console.log(editid);
   $.ajax({
     url: myApp.baseUrl + '/no_spoilers_posts/' + editid,
@@ -178,6 +194,7 @@ $(document).on('click','.save-ns-changes',function(e){
     },
   }).done(function(data) {
     console.log(data);
+    refreshHandlebars();
   }).fail(function(jqxhr) {
     console.error(jqxhr);
   });
@@ -186,6 +203,7 @@ $(document).on('click','.save-ns-changes',function(e){
 // Ajax to get spoilery post SINGULAR
 $(document).on('click','.sp-modal-trigger',function(){
   editid = $(this).val();
+  $('#SpoileryModal').modal('show');
   $.ajax({
     url: myApp.baseUrl + '/spoilery_posts/' + editid,
     method: 'GET',
@@ -227,6 +245,7 @@ $(document).on('click','.save-sp-changes',function(e){
     },
   }).done(function(data) {
     console.log(data);
+    refreshHandlebars();
   }).fail(function(jqxhr) {
     console.error(jqxhr);
   });
@@ -249,6 +268,7 @@ console.log("forms are active");
       myApp.user = data.user;
       adminLoggedIn = true;
       hideAdminConsole();
+      closeModal();
       console.log(data);
     }).fail(function(jqxhr) {
       console.error(jqxhr);
@@ -275,6 +295,7 @@ console.log("forms are active");
     }).done(function(data) {
       console.log(data);
       console.log('successfully changed password');
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
       alert('Please log in before changing your password.');
@@ -301,7 +322,7 @@ console.log("forms are active");
       console.log('signed out');
       adminLoggedIn = false;
       hideAdminConsole();
-      alert('You are now logged out.');
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
     });
@@ -323,6 +344,8 @@ console.log("forms are active");
     }).done(function(data) {
       myApp.user = data.user;
       console.log(data);
+      refreshHandlebars();
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
       alert('something broke');
@@ -345,6 +368,8 @@ console.log("forms are active");
     }).done(function(data) {
       console.log(data);
       console.log(data.spoilery_post.id);
+      refreshHandlebars();
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
       alert('something broke');
@@ -366,6 +391,8 @@ console.log("forms are active");
       data: formData,
     }).done(function(data) {
       console.log(data);
+      refreshHandlebars();
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
       alert('something broke');
@@ -392,7 +419,7 @@ $(document).on('click','.sp-delete-buttons',function(){
   }).done(function(data) {
     console.log(data);
     console.log('you deleted a spoilery post');
-
+    refreshHandlebars();
   }).fail(function(jqxhr) {
     console.error(jqxhr);
   });
@@ -413,6 +440,7 @@ $(document).on('click','.ns-delete-buttons',function(){
   }).done(function(data) {
     console.log(data);
     console.log('you deleted a no spoilers post');
+    refreshHandlebars();
   }).fail(function(jqxhr) {
     console.error(jqxhr);
   });
