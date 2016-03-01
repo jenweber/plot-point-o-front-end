@@ -30,18 +30,19 @@ $('#home a').click(function (e) {
   $(this).tab('show');
 });
 
-$('#no-spoilers-posts a').click(function (e) {
+$('#no-spoilers-tab a').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
 });
 
-$('#spoilery-posts a').click(function (e) {
+$('#spoilery-tab a').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
 });
 
 // Within-page navigation links created by handlebars
 let displaySpoileryAnchors = function(response){
+  $('#spoilery-posts-anchors').text('');
   let posts = response.spoilery_posts;
   let anchorTemplate = require('./anchor.handlebars');
   $('#spoilery-posts-anchors').append(anchorTemplate({
@@ -50,6 +51,7 @@ let displaySpoileryAnchors = function(response){
 };
 
 let displayNoSpoilerAnchors = function(response){
+  $('#no-spoilers-posts-anchors').text('');
   let posts = response.no_spoilers_posts;
   let anchorTemplate = require('./anchor.handlebars');
   $('#no-spoilers-posts-anchors').append(anchorTemplate({
@@ -59,6 +61,9 @@ let displayNoSpoilerAnchors = function(response){
 
 //
 let displaySpoileryPosts = function(response){
+  let saveAnchors = $('#spoilery-posts-anchors')
+  $('#spoilery-posts').text('');
+  $('#spoilery-posts').append(saveAnchors);
   let posts = response.spoilery_posts;
   let spoileryPostTemplate = require('./spoilery-post.handlebars');
   $('#spoilery-posts').append(spoileryPostTemplate({
@@ -68,6 +73,9 @@ let displaySpoileryPosts = function(response){
 };
 
 let displayNoSpoilersPosts = function(response){
+  let saveAnchors = $('#no-spoilers-posts-anchors')
+  $('#no-spoilers-posts').text('');
+  $('#no-spoilers-posts').append(saveAnchors);
   let posts = response.no_spoilers_posts;
   let noSpoilersPostTemplate = require('./no-spoilers-post.handlebars');
   $('#no-spoilers-posts').append(noSpoilersPostTemplate({
@@ -384,6 +392,7 @@ $(document).on('click','.sp-delete-buttons',function(){
   }).done(function(data) {
     console.log(data);
     console.log('you deleted a spoilery post');
+
   }).fail(function(jqxhr) {
     console.error(jqxhr);
   });
