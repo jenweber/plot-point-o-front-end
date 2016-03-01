@@ -24,11 +24,6 @@ $('#spoilery-posts a').click(function (e) {
   $(this).tab('show');
 });
 
-$('#login').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
-
 // Within-page navigation links created by handlebars
 let displaySpoileryAnchors = function(response){
   let posts = response.spoilery_posts;

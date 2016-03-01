@@ -7,16 +7,14 @@ $pale-blue: #7DB6D5;
 $pale-orange: #E7A555;
 $charcoal: #4A4747;
 
-html, body {
-    margin: 0;
-    padding: 0;
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 body {
   background-color: $redbackground;
   font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-  flex-direction: column;
   margin: 0;
   padding: 0;
 }
@@ -29,8 +27,9 @@ body {
 .bootstrap-tab-container {
   background-color: white;
   min-height: 400px;
-  margin: 2%;
+  margin: 2% auto;
   border-radius: 4px;
+  width: 80%;
 }
 
 .tab-pane {
@@ -42,6 +41,7 @@ body {
   width: 100%;
   color: white;
   padding: 2%;
+  margin: 0;
   text-align: center;
 }
 
@@ -51,7 +51,7 @@ body {
 }
 
 input {
-  width: 30%;
+  width: 60%;
 }
 
 .title-input {
@@ -60,4 +60,8 @@ input {
 
 label {
   width: 100%;
+}
+
+.centering {
+  margin: 0 auto;
 }

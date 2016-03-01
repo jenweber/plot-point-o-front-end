@@ -17,85 +17,23 @@
           <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
           <li role="presentation"><a href="#no-spoilers-posts" aria-controls="no-spoilers-posts" role="tab" data-toggle="tab">Spoiler-Free Zone</a></li>
           <li role="presentation"><a href="#spoilery-posts" aria-controls="spoilery-posts" role="tab" data-toggle="tab">Plot Analysis (Spoilers!)</a></li>
-          <li role="presentation"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+          <li role="presentation" class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#account-tab" role="button" aria-haspopup="true" aria-expanded="false">
+              Admin Console <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="admin-console" href="#adminLoginModal" data-toggle="modal">Admin Login Options</a></li>
+              <li><a class="admin-console" href="#newContentModal" data-toggle="modal">New Content</a></li>
+            </ul>
+          </li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="home">
 
-            <form id="sign-in">
-              <p><h3>Sign in:</h3></p>
-              <label>E-mail</br>
-                <input type="text" name="credentials[email]" value="">
-              </label>
-              <label>Password</br>
-                <input type="password" name="credentials[password]" value="">
-              </label>
-              <input type="submit" name="submit" value="Submit">
-            </form>
-            <form id="sign-out">
-              <p><h3>Sign out:</h3></p>
-              <input type="submit" name="submit" value="Submit">
-            </form>
-            <form id="change-password">
-              <p><h3>Change password:</h3></p>
-              <label>Old Password</br>
-                <input type="password" name="passwords[old]" value="">
-              </label>
-              <label>New Password</br>
-                <input type="password" name="passwords[new]" value="">
-              </label>
-              <input type="submit" name="submit" value="Submit">
-            </form>
-            <form id="new-game">
-              <p><h3>New Game:</h3></p>
-              <label>Name:</br>
-                <input type="text" name="game[name]" value="">
-              </label></br>
-              <label>Developer:</br>
-                <input type="text" name="game[developer]" value="">
-              </label></br>
-              <label>Platforms:</br>
-                <input type="text" name="game[platforms]" value="">
-              </label></br>
-              <label>Rating:</br>
-                <input type="text" name="game[rating]" value="">
-              </label></br>
-              <input type="submit" name="submit" value="Submit">
-            </form>
 
-            <form id="new-spoilery-post">
-              <p><h3>Create New Spoilery Post:</h3></p>
-              <label>Title</br>
-                <input type="text" class="title-input" name="spoilery_post[title]" value="">
-              </label></br>
-              <label>Content:</br>
-                <textarea id="sp-post-content" name="spoilery_post[content]" class="paragraph-input" placeholder="<i>html markup supported</i>"></textarea>
-              </label></br>
-              <label>Game:
-                <select class="list-of-games" name="spoilery_post[game_id]">
-                </select>
-                <!--<input type="number" id="game-id" name="spoilery_post[game_id]" value=""> -->
-              </label></br></br>
-              <input type="submit" name="submit" value="Submit">
-            </form>
 
-            <form id="new-no-spoilers-post">
-              <p><h3>Create New No Spoilers Post:</h3></p>
-              <label>Title</br>
-                <input type="text" class="title-input" name="no_spoilers_post[title]" value="">
-              </label></br>
-              <label>Content:</br>
-                <textarea id="ns-post-content" name="no_spoilers_post[content]" class="paragraph-input" placeholder="<i>html markup supported</i>"></textarea>
-              </label></br>
-              <label>Game:
-                <select class="list-of-games" name="no_spoilers_post[game_id]">
-                </select>
-                <!--<input type="number" id="game-id" name="spoilery_post[game_id]" value=""> -->
-              </label></br></br>
-              <input type="submit" name="submit" value="Submit">
-            </form>
 
           </div>
           <!-- No Spoilers Tab begins here -->
@@ -171,11 +109,119 @@
             </div>
           </div>
           <!-- END spoilery tab -->
-          <div role="tabpanel" class="tab-pane" id="login">
-              ...
+        </div>
+      </div>
+
+      <!-- Admin Login Modal -->
+      <div class="modal fade" id="adminLoginModal" tabindex="-1" role="dialog" aria-labelledby="adminLoginModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Admin Account Options</h4>
+            </div>
+            <div class="modal-body">
+              <form id="sign-in">
+                <p><h4>Sign in</h4></p>
+                <label>
+                  <input type="text" name="credentials[email]" placeholder="email address" value="">
+                </label>
+                <label>
+                  <input type="password" name="credentials[password]" placeholder="password" value="">
+                </label>
+                <input type="submit" name="submit" value="Sign In">
+              </form>
+              <form id="sign-out">
+                </br>
+                <input type="submit" name="submit" value="Sign Out">
+              </form>
+              <form id="change-password">
+                </br>
+                <p><h4>Change password</h4></p>
+                <label>
+                  <input type="password" name="passwords[old]" placeholder="old password" value="">
+                </label>
+                <label>
+                  <input type="password" name="passwords[new]" placeholder="new password" value="">
+                </label>
+                <input type="submit" name="submit" value="Submit">
+                </br></br>
+              </form>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
           </div>
         </div>
       </div>
+      <!-- END modal -->
+
+      <!-- New Content Modal -->
+      <div class="modal fade" id="newContentModal" tabindex="-1" role="dialog" aria-labelledby="newContentModal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">New Content</h4>
+            </div>
+            <div class="modal-body">
+              <form id="new-game">
+                <p><h4>New Game:</h4></p>
+                <label>
+                  <input type="text" name="game[name]" placeholder="Game Title" value="">
+                </label></br>
+                <label>
+                  <input type="text" name="game[developer]" placeholder="Developer/Studio" value="">
+                </label></br>
+                <label>
+                  <input type="text" name="game[platforms]" placeholder="Platforms, eg. Xbox, PS4, PC" value="">
+                </label></br>
+                <label>
+                  <input type="text" name="game[rating]" placeholder="Storyteller Rating: 1-5" value="">
+                </label></br>
+                <input type="submit" name="submit" value="Submit">
+              </form>
+
+              <form id="new-no-spoilers-post">
+                <p><h3>Create New No Spoilers Post:</h3></p>
+                <label>
+                  <input type="text" class="title-input" name="no_spoilers_post[title]" placeholder="Post Title" value="">
+                </label></br>
+                <label>
+                  <textarea id="ns-post-content" name="no_spoilers_post[content]" class="paragraph-input" placeholder="<i>No spoilers!!! html markup supported</i>"></textarea>
+                </label></br>
+                <label>Game:
+                  <select class="list-of-games" name="no_spoilers_post[game_id]">
+                  </select>
+                  <!--<input type="number" id="game-id" name="spoilery_post[game_id]" value=""> -->
+                </label></br></br>
+                <input type="submit" name="submit" value="Submit">
+              </form>
+
+              <form id="new-spoilery-post">
+                <p><h3>Create Plot Analysis (Spoilers!) Post:</h3></p>
+                <label>
+                  <input type="text" class="title-input"  name="spoilery_post[title]" placeholder="Post Title" value="">
+                </label></br>
+                <label>
+                  <textarea id="sp-post-content" name="spoilery_post[content]" class="paragraph-input" placeholder="<i>Spoiler warning automatically included. html markup supported</i>"></textarea>
+                </label></br>
+                <label>Game:
+                  <select class="list-of-games" name="spoilery_post[game_id]">
+                  </select>
+                  <!--<input type="number" id="game-id" name="spoilery_post[game_id]" value=""> -->
+                </label></br></br>
+                <input type="submit" name="submit" value="Submit">
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END modal -->
 
       <script src="http://localhost:8080/webpack-dev-server.js"></script>
     </body>
