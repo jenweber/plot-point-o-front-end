@@ -8,6 +8,22 @@ const myApp = {
   baseUrl: 'http://localhost:3000',
 };
 
+// hide all admin elements. Shown after admin login
+let adminLoggedIn = false;
+
+// shows/hides admin console. Triggered on clicks and sign in/out
+const hideAdminConsole = function() {
+  if (adminLoggedIn === false) {
+    $('.admin-console').hide();
+  } else { $('.admin-console').show(); }
+};
+
+$('.bootstrap-tab-container').on('click', function(){
+  if (adminLoggedIn === false) {
+    $('.admin-console').hide();
+  } else { $('.admin-console').show(); }
+});
+
 // Enable bootstrap tabs - uses .click because it's in current documentation
 $('#home a').click(function (e) {
   e.preventDefault();
@@ -106,9 +122,9 @@ $(document).ready(function(){
   getSpoileryPosts();
   getNoSpoilersPosts();
   getGames();
-
 });
 
+// declare variable to record the id of the record clicked
 let editid = 0;
 
 // Ajax to get no spoilers post SINGULAR
@@ -121,7 +137,7 @@ $(document).on('click','.ns-modal-trigger',function(){
     dataType: 'json'
   }).done(function(post){
     console.log(post);
-    fillNsEditForm(post)
+    fillNsEditForm(post);
   });
 });
 
@@ -168,7 +184,7 @@ $(document).on('click','.sp-modal-trigger',function(){
     dataType: 'json'
   }).done(function(post){
     console.log(post);
-    fillSpEditForm(post)
+    fillSpEditForm(post);
   });
 });
 
@@ -223,6 +239,8 @@ console.log("forms are active");
       data: formData,
     }).done(function(data) {
       myApp.user = data.user;
+      adminLoggedIn = true;
+      hideAdminConsole();
       console.log(data);
     }).fail(function(jqxhr) {
       console.error(jqxhr);
@@ -273,6 +291,8 @@ console.log("forms are active");
     }).done(function(data) {
       console.log(data);
       console.log('signed out');
+      adminLoggedIn = false;
+      hideAdminConsole();
       alert('You are now logged out.');
     }).fail(function(jqxhr) {
       console.error(jqxhr);
@@ -388,6 +408,8 @@ $(document).on('click','.ns-delete-buttons',function(){
     console.error(jqxhr);
   });
 });
+
+
 
 // template for handlebars button click handler
 // $(document).on('click','.test-buttons',function(){
