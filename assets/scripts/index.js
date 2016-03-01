@@ -32,10 +32,10 @@ $('.bootstrap-tab-container').on('click', function(){
 });
 
 // Enable bootstrap tabs - uses .click because it's in current documentation
-$('#home a').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
+// $('#home a').click(function (e) {
+//   e.preventDefault();
+//   $(this).tab('show');
+// });
 
 $('#no-spoilers-tab a').click(function (e) {
   e.preventDefault();
@@ -195,6 +195,7 @@ $(document).on('click','.save-ns-changes',function(e){
   }).done(function(data) {
     console.log(data);
     refreshHandlebars();
+    closeModal();
   }).fail(function(jqxhr) {
     console.error(jqxhr);
   });
@@ -246,6 +247,7 @@ $(document).on('click','.save-sp-changes',function(e){
   }).done(function(data) {
     console.log(data);
     refreshHandlebars();
+    closeModal();
   }).fail(function(jqxhr) {
     console.error(jqxhr);
   });
