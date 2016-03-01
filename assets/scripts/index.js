@@ -12,7 +12,9 @@ require('../styles/index.scss');
 //   console.log('JavaScript is running');
 // });
 
-
+const myApp = {
+  baseUrl: 'http://localhost:3000',
+};
 
 
 // Enable bootstrap tabs
@@ -120,15 +122,105 @@ $(document).ready(function(){
   getGames();
 
 });
-$('.test-buttons').on('click', '.test-buttons', function(){console.log(value)})
 
-// ajax
+let editid = 0;
 
-const myApp = {
-  baseUrl: 'http://localhost:3000',
+// Ajax to get no spoilers post SINGULAR
+$(document).on('click','.ns-modal-trigger',function(){
+  editid = $(this).val();
+  console.log(editid);
+  $.ajax({
+    url: myApp.baseUrl + '/no_spoilers_posts/' + editid,
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(post){
+    console.log(post);
+    fillNsEditForm(post)
+  });
+});
+
+// JQuery to populate no spoilers modal
+const fillNsEditForm = function(response) {
+  let post = response.no_spoilers_post;
+  console.log(post);
+  $('#edit-ns-post-title').val(post.title);
+  $('#edit-ns-post-content').text(post.content);
+  $('#edit-ns-post-game').val(post.game_id);
 };
 
-let adminStatus = false;
+// ajax to send PATCH for no spoilers
+$(document).on('click','.save-ns-changes',function(e){
+  console.log("edit no spoilers post submit clicked");
+  console.log($('#edit-ns-post-content').text());
+  e.preventDefault();
+  $.ajax({
+    url: myApp.baseUrl + '/no_spoilers_posts/' + editid,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + myApp.user.token,
+    },
+    data: {
+      no_spoilers_post: {
+        title: $('#edit-ns-post-title').val(),
+        content: $('#edit-ns-post-content').val(),
+        game_id: $('#edit-ns-post-game').val(),
+      }
+    },
+  }).done(function(data) {
+    console.log(data);
+  }).fail(function(jqxhr) {
+    console.error(jqxhr);
+  });
+});
+
+// Ajax to get spoilery post SINGULAR
+$(document).on('click','.sp-modal-trigger',function(){
+  editid = $(this).val();
+  $.ajax({
+    url: myApp.baseUrl + '/spoilery_posts/' + editid,
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(post){
+    console.log(post);
+    fillSpEditForm(post)
+  });
+});
+
+// JQuery to populate spoilery post modal
+const fillSpEditForm = function(response) {
+  let post = response.spoilery_post;
+  $('#edit-sp-post-title').val(post.title);
+  $('#edit-sp-post-content').text(post.content);
+  $('#edit-sp-post-game').val(post.game_id);
+};
+
+// ajax to send PATCH for spoilery posts
+$(document).on('click','.save-sp-changes',function(e){
+  console.log("edit spoilery post submit clicked");
+  console.log($('#edit-sp-post-title').val());
+  console.log($('#edit-sp-post-content').val());
+  console.log($('#edit-sp-post-game').val());
+  console.log(editid);
+  e.preventDefault();
+  $.ajax({
+    url: myApp.baseUrl + '/spoilery_posts/' + editid,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + myApp.user.token,
+    },
+    data: {
+      spoilery_post: {
+        title: $('#edit-sp-post-title').val(),
+        content: $('#edit-sp-post-content').val(),
+        game_id: $('#edit-sp-post-game').val(),
+      }
+    },
+  }).done(function(data) {
+    console.log(data);
+  }).fail(function(jqxhr) {
+    console.error(jqxhr);
+  });
+});
 
 $(document).ready(() => {
 console.log("forms are active");
@@ -269,12 +361,6 @@ console.log("forms are active");
 
 
 
-});
-
-$('.test-buttons').on('click', function(){console.log($(this).val())})
-
-$('#form-test').on('submit', function(e) {
-  console.log("new no spoilers post submit clicked");
 });
 
 $(document).on('click','.sp-delete-buttons',function(){

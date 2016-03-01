@@ -1,10 +1,12 @@
 {{#each posts}}
-<div class="post-title"><a name="{{game.id}}"><h3>{{title}}</h3></a></div>
+<div class="post-title"><a name="{{title}}"><h3>{{title}}</h3></a></div>
 <div class="game-name"><b><big>{{game.name}}</big></b><div>
 <div class="developed-by">Developed by: {{game.developer}}</div>
 <div class="platforms">Platforms: {{game.platforms}}</div>
-<div class="post-content">{{content}}</div>
-<button name="edit-np{{id}}-g{{game.id}}">Edit</button>
-<button class="ns-delete-buttons" id="del-np{{id}}-g{{game.id}}" value="{{id}}">Delete</button>
+<div class="post-content">{{{content}}}</div>
+<button type="button" class="btn btn-primary btn-sm ns-modal-trigger admin-console" data-toggle="modal" data-target="#noSpoilersModal" value="{{id}}">
+  Edit
+</button>
+<button class="ns-delete-buttons btn btn-primary btn-sm admin-console" id="del-np{{id}}-g{{game.id}}" value="{{id}}">Delete</button>
 <br>
 {{/each}}
