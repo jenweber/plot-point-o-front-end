@@ -2,6 +2,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
 $redbackground: #9D2E2C;
+$red-shadow: #3c1211;
 $pale-yellow: #F9EA99;
 $pale-blue: #006699;
 $pale-orange: #E7A555;
@@ -35,6 +36,7 @@ a {
   border-radius: 10px;
   width: 80%;
   border: 6px solid $pale-orange;
+  box-shadow: 0px 0px 15px $red-shadow;
 }
 
 .tab-pane {
@@ -61,6 +63,7 @@ a {
   padding: 2%;
   margin: 0;
   text-align: center;
+  box-shadow: 0 4px 4px -2px $red-shadow;
 }
 
 .paragraph-input {
@@ -100,4 +103,13 @@ input[type=submit] {
   border: none;
   color: white;
   border-radius: 3px;
+}
+
+.anchors-div {
+  width: 30%;
+  float: right;
+  margin: 3% 0 3% 3%;
+  border: 6px solid $pale-blue;
+  border-radius: 10px;
+  padding: 5px
 }

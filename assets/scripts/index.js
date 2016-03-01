@@ -28,7 +28,7 @@ $('#spoilery-posts a').click(function (e) {
 let displaySpoileryAnchors = function(response){
   let posts = response.spoilery_posts;
   let anchorTemplate = require('./anchor.handlebars');
-  $('#spoilery-posts').append(anchorTemplate({
+  $('#spoilery-posts-anchors').append(anchorTemplate({
     posts
   }));
 };
@@ -36,7 +36,7 @@ let displaySpoileryAnchors = function(response){
 let displayNoSpoilerAnchors = function(response){
   let posts = response.no_spoilers_posts;
   let anchorTemplate = require('./anchor.handlebars');
-  $('#no-spoilers-posts').append(anchorTemplate({
+  $('#no-spoilers-posts-anchors').append(anchorTemplate({
     posts
   }));
 };
