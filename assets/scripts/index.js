@@ -1,23 +1,14 @@
 'use strict';
 
-// require('./ajax');
-
 require('./example');
-
 require('../styles/index.scss');
 
-//
-//
-// $(document).ready(() => {
-//   console.log('JavaScript is running');
-// });
-
+//define home url used in all ajax
 const myApp = {
   baseUrl: 'http://localhost:3000',
 };
 
-
-// Enable bootstrap tabs
+// Enable bootstrap tabs - uses .click because it's in current documentation
 $('#home a').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
@@ -38,8 +29,7 @@ $('#login').click(function (e) {
   $(this).tab('show');
 });
 
-// handlebars
-
+// Within-page navigation links created by handlebars
 let displaySpoileryAnchors = function(response){
   let posts = response.spoilery_posts;
   let anchorTemplate = require('./anchor.handlebars');
@@ -56,6 +46,7 @@ let displayNoSpoilerAnchors = function(response){
   }));
 };
 
+//
 let displaySpoileryPosts = function(response){
   let posts = response.spoilery_posts;
   let spoileryPostTemplate = require('./spoilery-post.handlebars');
