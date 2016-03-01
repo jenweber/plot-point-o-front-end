@@ -1,60 +1,76 @@
 'use strict';
 
-// require('./ajax');
-
 require('./example');
-
 require('../styles/index.scss');
 
-//
-//
-// $(document).ready(() => {
-//   console.log('JavaScript is running');
+//define home url used in all ajax
+const myApp = {
+  baseUrl: 'http://localhost:3000',
+};
+
+// hide all admin elements. Shown after admin login
+let adminLoggedIn = false;
+
+// shows/hides admin console. Triggered on clicks and sign in/out
+const hideAdminConsole = function() {
+  if (adminLoggedIn === false) {
+    $('.admin-console').hide();
+  } else { $('.admin-console').show(); }
+};
+
+const closeModal = function () {
+  $('#noSpoilersModal').modal('hide');
+  $('#SpoileryModal').modal('hide');
+  $('#adminLoginModal').modal('hide');
+  $('#newContentModal').modal('hide');
+};
+
+$('.bootstrap-tab-container').on('click', function(){
+  if (adminLoggedIn === false) {
+    $('.admin-console').hide();
+  } else { $('.admin-console').show(); }
+});
+
+// Enable bootstrap tabs - uses .click because it's in current documentation
+// $('#home a').click(function (e) {
+//   e.preventDefault();
+//   $(this).tab('show');
 // });
 
-
-
-
-// Enable bootstrap tabs
-$('#home a').click(function (e) {
+$('#no-spoilers-tab a').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
 });
 
-$('#no-spoilers-posts a').click(function (e) {
+$('#spoilery-tab a').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
 });
 
-$('#spoilery-posts a').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
-
-$('#login').click(function (e) {
-  e.preventDefault();
-  $(this).tab('show');
-});
-
-// handlebars
-
+// Within-page navigation links created by handlebars
 let displaySpoileryAnchors = function(response){
+  $('#spoilery-posts-anchors').text('');
   let posts = response.spoilery_posts;
   let anchorTemplate = require('./anchor.handlebars');
-  $('#spoilery-posts').append(anchorTemplate({
+  $('#spoilery-posts-anchors').append(anchorTemplate({
     posts
   }));
 };
 
 let displayNoSpoilerAnchors = function(response){
+  $('#no-spoilers-posts-anchors').text('');
   let posts = response.no_spoilers_posts;
   let anchorTemplate = require('./anchor.handlebars');
-  $('#no-spoilers-posts').append(anchorTemplate({
+  $('#no-spoilers-posts-anchors').append(anchorTemplate({
     posts
   }));
 };
 
+//
 let displaySpoileryPosts = function(response){
+  let saveAnchors = $('#spoilery-posts-anchors');
+  $('#spoilery-posts').text('');
+  $('#spoilery-posts').append(saveAnchors);
   let posts = response.spoilery_posts;
   let spoileryPostTemplate = require('./spoilery-post.handlebars');
   $('#spoilery-posts').append(spoileryPostTemplate({
@@ -64,6 +80,9 @@ let displaySpoileryPosts = function(response){
 };
 
 let displayNoSpoilersPosts = function(response){
+  let saveAnchors = $('#no-spoilers-posts-anchors');
+  $('#no-spoilers-posts').text('');
+  $('#no-spoilers-posts').append(saveAnchors);
   let posts = response.no_spoilers_posts;
   let noSpoilersPostTemplate = require('./no-spoilers-post.handlebars');
   $('#no-spoilers-posts').append(noSpoilersPostTemplate({
@@ -114,21 +133,125 @@ let getGames = function(){
   });
 };
 
-$(document).ready(function(){
+// fires on doc ready, delete, update, create posts
+const refreshHandlebars = function() {
   getSpoileryPosts();
   getNoSpoilersPosts();
   getGames();
-
-});
-$('.test-buttons').on('click', '.test-buttons', function(){console.log(value)})
-
-// ajax
-
-const myApp = {
-  baseUrl: 'http://localhost:3000',
 };
 
-let adminStatus = false;
+// Function to set up handlebars content
+$(document).ready(function(){
+  refreshHandlebars();
+});
+
+
+// declare variable to record the id of the record clicked
+let editid = 0;
+
+
+// Ajax to get no spoilers post SINGULAR
+$(document).on('click','.ns-modal-trigger',function(){
+  editid = $(this).val();
+  $('#noSpoilersModal').modal('show');
+  console.log(editid);
+  $.ajax({
+    url: myApp.baseUrl + '/no_spoilers_posts/' + editid,
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(post){
+    console.log(post);
+    fillNsEditForm(post);
+  });
+});
+
+// JQuery to populate no spoilers modal
+const fillNsEditForm = function(response) {
+  let post = response.no_spoilers_post;
+  console.log(post);
+  $('#edit-ns-post-title').val(post.title);
+  $('#edit-ns-post-content').text(post.content);
+  $('#edit-ns-post-game').val(post.game_id);
+};
+
+// ajax to send PATCH for no spoilers
+$(document).on('click','.save-ns-changes',function(e){
+  console.log("edit no spoilers post submit clicked");
+  console.log($('#edit-ns-post-content').text());
+  e.preventDefault();
+  $.ajax({
+    url: myApp.baseUrl + '/no_spoilers_posts/' + editid,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + myApp.user.token,
+    },
+    data: {
+      no_spoilers_post: {
+        title: $('#edit-ns-post-title').val(),
+        content: $('#edit-ns-post-content').val(),
+        game_id: $('#edit-ns-post-game').val(),
+      }
+    },
+  }).done(function(data) {
+    console.log(data);
+    refreshHandlebars();
+    closeModal();
+  }).fail(function(jqxhr) {
+    console.error(jqxhr);
+  });
+});
+
+// Ajax to get spoilery post SINGULAR
+$(document).on('click','.sp-modal-trigger',function(){
+  editid = $(this).val();
+  $('#SpoileryModal').modal('show');
+  $.ajax({
+    url: myApp.baseUrl + '/spoilery_posts/' + editid,
+    method: 'GET',
+    dataType: 'json'
+  }).done(function(post){
+    console.log(post);
+    fillSpEditForm(post);
+  });
+});
+
+// JQuery to populate spoilery post modal
+const fillSpEditForm = function(response) {
+  let post = response.spoilery_post;
+  $('#edit-sp-post-title').val(post.title);
+  $('#edit-sp-post-content').text(post.content);
+  $('#edit-sp-post-game').val(post.game_id);
+};
+
+// ajax to send PATCH for spoilery posts
+$(document).on('click','.save-sp-changes',function(e){
+  console.log("edit spoilery post submit clicked");
+  console.log($('#edit-sp-post-title').val());
+  console.log($('#edit-sp-post-content').val());
+  console.log($('#edit-sp-post-game').val());
+  console.log(editid);
+  e.preventDefault();
+  $.ajax({
+    url: myApp.baseUrl + '/spoilery_posts/' + editid,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + myApp.user.token,
+    },
+    data: {
+      spoilery_post: {
+        title: $('#edit-sp-post-title').val(),
+        content: $('#edit-sp-post-content').val(),
+        game_id: $('#edit-sp-post-game').val(),
+      }
+    },
+  }).done(function(data) {
+    console.log(data);
+    refreshHandlebars();
+    closeModal();
+  }).fail(function(jqxhr) {
+    console.error(jqxhr);
+  });
+});
 
 $(document).ready(() => {
 console.log("forms are active");
@@ -145,6 +268,9 @@ console.log("forms are active");
       data: formData,
     }).done(function(data) {
       myApp.user = data.user;
+      adminLoggedIn = true;
+      hideAdminConsole();
+      closeModal();
       console.log(data);
     }).fail(function(jqxhr) {
       console.error(jqxhr);
@@ -171,6 +297,7 @@ console.log("forms are active");
     }).done(function(data) {
       console.log(data);
       console.log('successfully changed password');
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
       alert('Please log in before changing your password.');
@@ -195,7 +322,9 @@ console.log("forms are active");
     }).done(function(data) {
       console.log(data);
       console.log('signed out');
-      alert('You are now logged out.');
+      adminLoggedIn = false;
+      hideAdminConsole();
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
     });
@@ -217,6 +346,8 @@ console.log("forms are active");
     }).done(function(data) {
       myApp.user = data.user;
       console.log(data);
+      refreshHandlebars();
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
       alert('something broke');
@@ -239,6 +370,8 @@ console.log("forms are active");
     }).done(function(data) {
       console.log(data);
       console.log(data.spoilery_post.id);
+      refreshHandlebars();
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
       alert('something broke');
@@ -260,6 +393,8 @@ console.log("forms are active");
       data: formData,
     }).done(function(data) {
       console.log(data);
+      refreshHandlebars();
+      closeModal();
     }).fail(function(jqxhr) {
       console.error(jqxhr);
       alert('something broke');
@@ -269,12 +404,6 @@ console.log("forms are active");
 
 
 
-});
-
-$('.test-buttons').on('click', function(){console.log($(this).val())})
-
-$('#form-test').on('submit', function(e) {
-  console.log("new no spoilers post submit clicked");
 });
 
 $(document).on('click','.sp-delete-buttons',function(){
@@ -292,6 +421,7 @@ $(document).on('click','.sp-delete-buttons',function(){
   }).done(function(data) {
     console.log(data);
     console.log('you deleted a spoilery post');
+    refreshHandlebars();
   }).fail(function(jqxhr) {
     console.error(jqxhr);
   });
@@ -312,10 +442,13 @@ $(document).on('click','.ns-delete-buttons',function(){
   }).done(function(data) {
     console.log(data);
     console.log('you deleted a no spoilers post');
+    refreshHandlebars();
   }).fail(function(jqxhr) {
     console.error(jqxhr);
   });
 });
+
+
 
 // template for handlebars button click handler
 // $(document).on('click','.test-buttons',function(){
