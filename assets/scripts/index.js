@@ -100,7 +100,7 @@ let displayGameList = function(response){
 
 let getSpoileryPosts = function(){
   $.ajax({
-    url: "http://plot-point-o-api.herokuapp.com/spoilery_posts",
+    url: "https://plot-point-o-api.herokuapp.com/spoilery_posts",
     method: 'GET',
     dataType: 'json'
   }).done(function(posts){
@@ -112,7 +112,7 @@ let getSpoileryPosts = function(){
 
 let getNoSpoilersPosts = function(){
   $.ajax({
-    url: "http://plot-point-o-api.herokuapp.com/no_spoilers_posts",
+    url: "https://plot-point-o-api.herokuapp.com/no_spoilers_posts",
     method: 'GET',
     dataType: 'json'
   }).done(function(posts){
@@ -124,7 +124,7 @@ let getNoSpoilersPosts = function(){
 
 let getGames = function(){
   $.ajax({
-    url: "http://plot-point-o-api.herokuapp.com/games",
+    url: "https://plot-point-o-api.herokuapp.com/games",
     method: 'GET',
     dataType: 'json'
   }).done(function(posts){
@@ -149,6 +149,14 @@ $(document).ready(function(){
 // declare variable to record the id of the record clicked
 let editid = 0;
 
+// JQuery to populate no spoilers modal
+const fillNsEditForm = function(response) {
+  let post = response.no_spoilers_post;
+  console.log(post);
+  $('#edit-ns-post-title').val(post.title);
+  $('#edit-ns-post-content').text(post.content);
+  $('#edit-ns-post-game').val(post.game_id);
+};
 
 // Ajax to get no spoilers post SINGULAR
 $(document).on('click','.ns-modal-trigger',function(){
@@ -165,14 +173,7 @@ $(document).on('click','.ns-modal-trigger',function(){
   });
 });
 
-// JQuery to populate no spoilers modal
-const fillNsEditForm = function(response) {
-  let post = response.no_spoilers_post;
-  console.log(post);
-  $('#edit-ns-post-title').val(post.title);
-  $('#edit-ns-post-content').text(post.content);
-  $('#edit-ns-post-game').val(post.game_id);
-};
+
 
 // ajax to send PATCH for no spoilers
 $(document).on('click','.save-ns-changes',function(e){
@@ -201,6 +202,14 @@ $(document).on('click','.save-ns-changes',function(e){
   });
 });
 
+// JQuery to populate spoilery post modal
+const fillSpEditForm = function(response) {
+  let post = response.spoilery_post;
+  $('#edit-sp-post-title').val(post.title);
+  $('#edit-sp-post-content').text(post.content);
+  $('#edit-sp-post-game').val(post.game_id);
+};
+
 // Ajax to get spoilery post SINGULAR
 $(document).on('click','.sp-modal-trigger',function(){
   editid = $(this).val();
@@ -215,13 +224,7 @@ $(document).on('click','.sp-modal-trigger',function(){
   });
 });
 
-// JQuery to populate spoilery post modal
-const fillSpEditForm = function(response) {
-  let post = response.spoilery_post;
-  $('#edit-sp-post-title').val(post.title);
-  $('#edit-sp-post-content').text(post.content);
-  $('#edit-sp-post-game').val(post.game_id);
-};
+
 
 // ajax to send PATCH for spoilery posts
 $(document).on('click','.save-sp-changes',function(e){
