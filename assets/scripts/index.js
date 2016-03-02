@@ -5,7 +5,7 @@ require('../styles/index.scss');
 
 //define home url used in all ajax
 const myApp = {
-  baseUrl: 'http://plot-point-o-api.herokuapp.com',
+  baseUrl: 'https://plot-point-o-api.herokuapp.com',
 };
 
 // hide all admin elements. Shown after admin login
@@ -257,8 +257,9 @@ $(document).ready(() => {
 console.log("forms are active");
 // sign in
   $('#sign-in').on('submit', function(e) {
-    console.log("clicked");
     e.preventDefault();
+    console.log("clicked");
+    debugger;
     let formData = new FormData(e.target);
     $.ajax({
       url: myApp.baseUrl + '/sign-in',
