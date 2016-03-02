@@ -5,7 +5,7 @@ require('../styles/index.scss');
 
 //define home url used in all ajax
 const myApp = {
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://plot-point-o-api.herokuapp.com',
 };
 
 // hide all admin elements. Shown after admin login
@@ -100,7 +100,7 @@ let displayGameList = function(response){
 
 let getSpoileryPosts = function(){
   $.ajax({
-    url: "http://localhost:3000/spoilery_posts",
+    url: "http://plot-point-o-api.herokuapp.com/spoilery_posts",
     method: 'GET',
     dataType: 'json'
   }).done(function(posts){
@@ -112,7 +112,7 @@ let getSpoileryPosts = function(){
 
 let getNoSpoilersPosts = function(){
   $.ajax({
-    url: "http://localhost:3000/no_spoilers_posts",
+    url: "http://plot-point-o-api.herokuapp.com/no_spoilers_posts",
     method: 'GET',
     dataType: 'json'
   }).done(function(posts){
@@ -124,7 +124,7 @@ let getNoSpoilersPosts = function(){
 
 let getGames = function(){
   $.ajax({
-    url: "http://localhost:3000/games",
+    url: "http://plot-point-o-api.herokuapp.com/games",
     method: 'GET',
     dataType: 'json'
   }).done(function(posts){
@@ -257,8 +257,9 @@ $(document).ready(() => {
 console.log("forms are active");
 // sign in
   $('#sign-in').on('submit', function(e) {
-    console.log("clicked");
     e.preventDefault();
+    console.log("clicked");
+    debugger;
     let formData = new FormData(e.target);
     $.ajax({
       url: myApp.baseUrl + '/sign-in',
