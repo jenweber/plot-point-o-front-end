@@ -16,12 +16,12 @@ For the database, a game has many blog posts. An admin also has many posts. Thos
 [Mobile First Wireframe Draft](https://drive.google.com/file/d/0BxL5EMSDOzzwMmRqb2dmZkRUM2s/view?usp=sharing)
 
 # ERD
-[Initial Database Diagram](https://drive.google.com/file/d/0BxL5EMSDOzzwSVNmNk5NSXVrdEk/view?usp=sharing)
+[Initial Database Diagram](https://drive.google.com/file/d/0BxL5EMSDOzzwSVNmNk5NSXVrdEk/view?usp=sharing) and
 [Updated Database Diagram](https://drive.google.com/file/d/0BxL5EMSDOzzwMTZaVnhINHlNLXc/view?usp=sharing)
 
 # Visual Mockup
-[Initial Design](https://drive.google.com/file/d/0BxL5EMSDOzzwaDNqNXRmVUlRd2M/view?usp=sharing)
-[Updated color scheme](https://drive.google.com/file/d/0BxL5EMSDOzzwa0lFMkxYTWpfcmc/view?usp=sharing)
+[Initial design](https://drive.google.com/file/d/0BxL5EMSDOzzwaDNqNXRmVUlRd2M/view?usp=sharing) and 
+[updated color scheme](https://drive.google.com/file/d/0BxL5EMSDOzzwa0lFMkxYTWpfcmc/view?usp=sharing)
 
 # Basic User Stories
 A new user will see the default blog view of the spoiler-free zone.
