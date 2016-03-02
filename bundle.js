@@ -30,7 +30,7 @@ webpackJsonp([0],[
 
 	//define home url used in all ajax
 	var myApp = {
-	  baseUrl: 'http://localhost:3000'
+	  baseUrl: 'https://plot-point-o-api.herokuapp.com'
 	};
 
 	// hide all admin elements. Shown after admin login
@@ -128,7 +128,7 @@ webpackJsonp([0],[
 
 	var getSpoileryPosts = function getSpoileryPosts() {
 	  $.ajax({
-	    url: "http://localhost:3000/spoilery_posts",
+	    url: "http://plot-point-o-api.herokuapp.com/spoilery_posts",
 	    method: 'GET',
 	    dataType: 'json'
 	  }).done(function (posts) {
@@ -140,7 +140,7 @@ webpackJsonp([0],[
 
 	var getNoSpoilersPosts = function getNoSpoilersPosts() {
 	  $.ajax({
-	    url: "http://localhost:3000/no_spoilers_posts",
+	    url: "http://plot-point-o-api.herokuapp.com/no_spoilers_posts",
 	    method: 'GET',
 	    dataType: 'json'
 	  }).done(function (posts) {
@@ -152,7 +152,7 @@ webpackJsonp([0],[
 
 	var getGames = function getGames() {
 	  $.ajax({
-	    url: "http://localhost:3000/games",
+	    url: "http://plot-point-o-api.herokuapp.com/games",
 	    method: 'GET',
 	    dataType: 'json'
 	  }).done(function (posts) {
@@ -283,8 +283,9 @@ webpackJsonp([0],[
 	  console.log("forms are active");
 	  // sign in
 	  $('#sign-in').on('submit', function (e) {
-	    console.log("clicked");
 	    e.preventDefault();
+	    console.log("clicked");
+	    debugger;
 	    var formData = new FormData(e.target);
 	    $.ajax({
 	      url: myApp.baseUrl + '/sign-in',
