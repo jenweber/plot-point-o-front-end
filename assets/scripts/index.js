@@ -259,7 +259,6 @@ console.log("forms are active");
   $('#sign-in').on('submit', function(e) {
     e.preventDefault();
     console.log("clicked");
-    debugger;
     let formData = new FormData(e.target);
     $.ajax({
       url: myApp.baseUrl + '/sign-in',
