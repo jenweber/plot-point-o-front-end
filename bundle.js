@@ -285,7 +285,6 @@ webpackJsonp([0],[
 	  $('#sign-in').on('submit', function (e) {
 	    e.preventDefault();
 	    console.log("clicked");
-	    debugger;
 	    var formData = new FormData(e.target);
 	    $.ajax({
 	      url: myApp.baseUrl + '/sign-in',
