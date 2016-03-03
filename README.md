@@ -1,6 +1,6 @@
 # Plot Point O
 
-[Plot Point O](http://jenweber.github.io/plot-point-o-front-end/) is a full stack, single page application. It features a custom admin console, rails server, generated content with Handlebars, tabbed Bootstrap navigation, and Bootstrap modals.
+[Plot Point O](http://jenweber.github.io/plot-point-o-front-end/) is a full stack, single page application. It features a custom admin console, rails server, generated content with Handlebars, tabbed Bootstrap navigation, and Bootstrap modals. Information about the back end can be found in [this repository](https://github.com/jenweber/plot-point-o-api), and it is [deployed on Heroku](https://plot-point-o-api.herokuapp.com/).
 
 There are two different scenarios where I read entertainment reviews - to decide if it's worth my time, and to read the analysis of others. Plot Point O was inspired by this dichotomy. There are two different audiences here, who need two different articles for each game or movie. A well-designed site could serve both these audiences without spoiling any endings.
 
@@ -18,6 +18,8 @@ For the database, a game has many blog posts. An admin also has many posts. Thos
 # ERD
 [Initial Database Diagram](https://drive.google.com/file/d/0BxL5EMSDOzzwSVNmNk5NSXVrdEk/view?usp=sharing) and
 [Updated Database Diagram](https://drive.google.com/file/d/0BxL5EMSDOzzwMTZaVnhINHlNLXc/view?usp=sharing)
+
+More on this found in the [API README]().
 
 # Visual Mockup
 [Initial design](https://drive.google.com/file/d/0BxL5EMSDOzzwaDNqNXRmVUlRd2M/view?usp=sharing) and
